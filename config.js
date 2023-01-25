@@ -1,7 +1,7 @@
 module.exports = {
-    token: "YOUR_DISCORD_BOT_TOKEN",
-    channel: "XXXXXXXXXXXXXXXXXX",
-    messageTemplate: "Hello @everyone, **{author}** just now uploaded a video **{title}**!\n{url}",
-    channel_id: "YOUTUBE_CHANNEL_ID",
-    watchInterval: 30000
+  token: "YOUR_DISCORD_BOT_TOKEN",
+  discordChannel: "XXXXXXXXXXXXXXXXXX",
+  messageTemplate: "Hello @everyone, **{author}** just started streaming!\n{url}",
+  youtube_channels: ["@YOUTUBE_CHANNEL"],
+  watchInterval: 30000
 }
