@@ -12,7 +12,7 @@ client.on("ready", () => {
 
 function onStart() {
   // Add new youtube channels to database
-  client.config.youtube_channels.forEach((channel) => {
+  client.config.youtubeChannels.forEach((channel) => {
     if (client.db.fetch(channel) === null) client.db.set(channel, false);
   });
 }
@@ -20,7 +20,7 @@ function onStart() {
 function checkYoutubeChannels() {
   setInterval(() => {
     // Check if YouTube channels are streaming
-    client.config.youtube_channels.forEach((channel) => {
+    client.config.youtubeChannels.forEach((channel) => {
       fetch(`https://www.youtube.com/c/${channel}`)
       .then((data) => data.text())
       .then((text) => {
@@ -33,10 +33,10 @@ function checkYoutubeChannels() {
 
         if (isStreaming && !client.db.fetch(channel)) {
           // Find Discord channel to post message in
-          const discordChannel = client.channels.cache.find(c => c.name === client.config.discordChannel);
+          const discordChannel = client.channels.cache.get(client.config.discordChannelId);
           if (!discordChannel) return;
           const message = client.config.messageTemplate
-          .replace(/{author}/g, channel)
+          .replace(/{author}/g, channel.slice(1))
           .replace(/{url}/g, `https://www.youtube.com/c/${channel}/live`);
           discordChannel.send(message);
 

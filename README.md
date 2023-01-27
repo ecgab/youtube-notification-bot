@@ -13,9 +13,9 @@ Simple and easy to use discord bot to notify members whenever YouTube channels a
 ```js
 module.exports = {
     token: "YOUR_DISCORD_BOT_TOKEN", // discord bot token
-    discordChannel: "DISCORD_CHANNEL_ID", // discord channel to send message
+    discordChannelId: "DISCORD_CHANNEL_ID", // discord channel to send message
     messageTemplate: "Hello @everyone, **{author}** just started streaming!\n{url}", // message to send on discord
-    youtube_channels: ["@YOUTUBE_CHANNEL_1", "@YOUTUBE_CHANNEL_2"], // YouTube channels
+    youtubeChannels: ["@YOUTUBE_CHANNEL_1", "@YOUTUBE_CHANNEL_2"], // YouTube channels
     watchInterval: 30000 // Check every 30 seconds
 };
 ```
