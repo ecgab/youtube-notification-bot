@@ -6,21 +6,16 @@ client.config = require("./config.js");
 
 client.on("ready", () => {
   console.log("I'm ready!");
-  onStart();
   checkYoutubeChannels();
 });
-
-function onStart() {
-  // Add new youtube channels to database
-  client.config.youtubeChannels.forEach((channel) => {
-    if (client.db.fetch(channel) === null) client.db.set(channel, false);
-  });
-}
 
 function checkYoutubeChannels() {
   setInterval(() => {
     // Check if YouTube channels are streaming
     client.config.youtubeChannels.forEach((channel) => {
+      // Add new youtube channels to database
+      if (client.db.fetch(channel) === null) client.db.set(channel, false);
+
       fetch(`https://www.youtube.com/c/${channel}`)
       .then((data) => data.text())
       .then((text) => {
@@ -39,6 +34,7 @@ function checkYoutubeChannels() {
           .replace(/{author}/g, channel.slice(1))
           .replace(/{url}/g, `https://www.youtube.com/c/${channel}/live`);
           discordChannel.send(message);
+          console.log('Message sent.', client.db.fetch(channel));
 
           client.db.set(channel, true);
         } else if (!isStreaming) client.db.set(channel, false);
